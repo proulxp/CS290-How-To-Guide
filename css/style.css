@@ -28,6 +28,8 @@
 		color: #777;
 	}
 
+
+
 	h1,h2,h3,h4,h5,h6
 	{
 		font-weight: 300;
@@ -1024,4 +1026,41 @@
 		text-align: center;
 	}
 
+	pre 
+	{
+		background-color: #f5f5f5;
+		border: 1px solid #ccc;
+		border-radius: 4px;
+		position: relative;
+		margin: 0 auto;
 
+
+	}
+	code
+	{
+		margin: 0;
+   		position: relative;               
+   		
+	}
+
+	#introP
+	{
+		text-align: left;
+	}
+
+	#introH
+	{
+		font-size: xx-large;
+	}
+	#introL
+	{
+		text-align: left;
+		line-height: 2em;
+    	font-size: 1.2em;
+	}
+
+	.normalH
+	{
+		font-size: large;
+		font-weight: bold;
+	}

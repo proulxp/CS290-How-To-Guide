@@ -48,23 +48,69 @@
 				<section>
 					<header>
 						<h2>API Introduction</h2>
-						<span class="byline">What is an API?</span>
+						<span class="byline"></span>
 					</header>
-					<p>   API Intro Page 
+					
+					<h1 class = "normalH">Note on Content</h1>
+					<p> 
+					As stated before in the welcome homepage, this guide is not intended for developer's who have never utilized an API before. This guide is intended to show the specifc details of getting the NASA API up and running while using standard AJAX requests in Java Script without using JQUERY or other outside libraries.</p>			
+					<p>
+					<h1 class = "normalH">API Key</h1>
+					Before we begin setting up our Java Script AJAX requests, you need to obtain a developer key for the NASA API. Even though, the NASA API is mostly public domain (yay!) it still requires a API key to monitor the amout of usage a particular developer is demanding. Registration for the NASA API is currently well documented and can be accomplished at the following link:
+					</p>
+					<p>
+					<a href="https://api.nasa.gov/index.html#apply-for-an-api-key" target="_blank">NASA API Key Registration</a>
+					</p>
+					
+					<p>
+					After signing up, NASA will email you the key which can be used on EVERY API under the NASA API designation!
+					</p>
+				
+					<p>
+					<h1 class = "normalH">NASA AJAX Requests</h1>
+					In this guide, we will only be exploring specific NASA API's that require GET requests. The below code is an example of the AJAX request which will be modified for every API example going forward. After reviewing the code below, please continue for an explanation of the functionality of each of the parts.
+					</p>
+					
+					<p>
+					<pre>
+					<code>
+					var exampleURL = 'Your API Query URL Goes Here';
 
+					var apiKey = 'Your Key Goes Here'; 
 
+					var request = new XMLHttpRequest(); 
+					request.open('GET', exampleURL + 'api_key=' + apiKey, true);
 
+					request.addEventListener('load',function(){
 
+					if(request.status >= 200 && request.status < 400){
+					var response = JSON.parse(request.responseText);
+					console.log(response);
+					} 
+					else {
+					     console.log("Error in network request: " + request.statusText);
+					}});
+					request.send(null);
+					</code>
+					</pre>
+					</p>
 
-
+					<h1 class = "normalH">NASA Query URL</h1>
+					Alright, let us break down this code line by line as a review for JavaScript AJAX requests and for explanation for the NASA API.
+					<pre>
+					<code>
+					var exampleURL = 'Your API Query URL Goes Here';
+					</code>
+					</pre>
+					This code
 					</p>
 										
-
 				</section>
+				<br>
 			</div>
 			
 			<div class = "endButtons">
-  			<a href="index.html" class="button button-style1">Last Page</a>
+  			<a href="index.html" class="button button-style1">Previous Page</a>
 			<a href="jsonObjects.html" class="button button-style1">Next Page</a>
 			</div>
 			</div>
@@ -74,9 +120,7 @@
 	<!-- Tweet -->
 		<div id="tweet">
 			<div class="container">
-				<section>
-					<blockquote>&ldquo;In posuere eleifend odio. Quisque semper augue mattis wisi. Maecenas ligula. Pellentesque viverra vulputate enim. Aliquam erat volutpat.&rdquo;</blockquote>
-				</section>
+				
 			</div>
 		</div>
 	<!-- /Tweet -->
