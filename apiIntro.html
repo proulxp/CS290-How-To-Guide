@@ -79,7 +79,7 @@
 					var apiKey = 'Your Key Goes Here'; 
 
 					var request = new XMLHttpRequest(); 
-					request.open('GET', exampleURL + 'api_key=' + apiKey, true);
+					request.open('GET', exampleURL + '?api_key=' + apiKey, true);
 
 					request.addEventListener('load',function(){
 
@@ -100,9 +100,53 @@
 					<pre>
 					<code>
 					var exampleURL = 'Your API Query URL Goes Here';
+
+					var apiKey = 'Your Key Goes Here';
 					</code>
 					</pre>
-					This code
+					This code is the beginning of the AJAX request. The first line is a variable to hold the specific API URL you will be accessing. This will change based on the API you are using. As you will soon see with the specific API examples, this can modified with specific information and variables to specify the type of information the user requests. The second line above hold's the user's API key. This will be intentionally left blank in all examples going forward. API keys should remain private to ensure the developer's usage is properly reflected. 
+					</p>
+
+					<h1 class = "normalH">NASA GET Requests</h1>
+					<pre>
+					<code>
+					var request = new XMLHttpRequest(); 
+
+					request.open('GET', exampleURL + 'api_key=' + apiKey, true);
+					</code>
+					</pre>
+					The next two lines of code are crucial. This is were the actual AJAX requests takes place. As stated before, this guide is not an all encompasing guide to AJAX requests and asyncronous requests. The key thing to remember is that for all API's in this guide will be of the 'GET' type. This means that we will be simply requesting information from the various NASA servers and not sending information to be posted on those servers. As you can see, the variables defined earlier will form a concatenated URL that will be sent to the NASA servers to request certain information and services. The last part of this request is the 'true' designation. This specifies that our request will be made asyncronously. 
+					</p>
+
+					<h1 class = "normalH">Returned JSON Objects</h1>
+					<pre>
+					<code>
+					request.addEventListener('load',function(){
+
+					if(request.status >= 200 && request.status < 400){
+					var response = JSON.parse(request.responseText);
+					console.log(response);
+					} 
+					else {
+					     console.log("Error in network request: " + request.statusText);
+					}});
+					</code>
+					</pre>
+					The next lines of code handle the request error handling and also return the information that is at the heart of the API. The first line, "request.addEventListener('load',function()", is an event listener attached to our request variable. This listener essentially waits until the defined action 'load' is complete before executing the function endompased by the listener. The 'load' action waits for the page to load before executing. The defined function contains a condtional statement that ensures the request made it to the server and a healthy status was returned. If the status is in the 200-400 range you know the request was succesfully made. If it is outside the range, an error is returned with the concatenated status text. If the request was made succesfully, a new variable called 'response' is created containing the heart of our request, the Javascript object converted from the JSON object containing the requested information. The above example displays the contents of this object to the console. The next page of this guide goes into detail regarding the JSON objects.
+					</p>
+
+					<h1 class = "normalH">AJAX Send</h1>
+					<pre>
+					<code>
+					request.send(null);
+					</code>
+					</pre>
+					The last line of code is the send method to our HTTP request object. This sends the request to the NASA servers with no additional information encoded. This is the 'null' value in the parenthesis. There is no additional information because of the fact that all API's discussed in this guide are 'GET' requests. 
+					</p>
+
+					<h1 class = "normalH">API Introduction Recap</h1>
+					<p>
+					As stated before, the first two sections of this guide should be more a recap to the developer and not an all encompassing guide to AJAX requests. At this point, the developer should understand the formatting of the requests we will be making in this guide. Going forward, the next section will go through an example JSON object returned from EPIC API and then going forward this guide will go into specific detail regarding the aformentioned APIs. 
 					</p>
 										
 				</section>

@@ -49,12 +49,212 @@
 				<section>
 					<header>
 						<h2>EPIC API</h2>
-						<span class="byline">What is an API?</span>
+						<span class="byline"></span>
 					</header>
-					<p>   API Intro Page 
+					<h1 class = "normalH">EPIC API Background</h1>
+					<p> 
+					The first specific API we will be exploring in this How-To Guide is the NASA EPIC API. Good job parsing through the introductory modules to get to the core subject matter of this guide! The EPIC API allows developer's access to the information retrieved from the Deep Space Climate Observatory (DSCOVR) satelite's EPIC instrumentation. EPIC stands for Earth Polychromatic Imaging Camera. The specific documentation for this API can be found here:
+					</p>
+					<p>
+					<a href="https://api.nasa.gov/api.html#EPIC" target="_blank">EPIC API Documentation</a>
+					</p>
+					<p> 
+					Of the three API's this guide covers, the EPIC API has the best documentation for query requests but lacks in the specifics of how to access the images from the servers once a specific image is found. This guide will fill in this current documentation gap and give a specific application as an example of this API's impementation.
+					</p>
+					<h1 class = "normalH">EPIC URL Queries</h1>
+					<p> 
+					The above link goes into a good amount of detail regarding the URL query specifics for this API. The idea is this API allows developer's access to either natural color images or enhanced color images from the EPIC instruments. This can be requested either on a specific date or a list of most recent images can be returned to the user. This API guide will focus on requesting the natural images taken on a specific date but the techniques shown in this example can be applied on all other forms of this query.
+					</p>
+					<h1 class = "normalH">Example Query Code</h1>
+					<p> 
+					As shown in the "JSON Objects" module, the following code can be used to request information from the EPIC API.
+					</p>
+					<pre>
+					<code>
+					var exampleURL = "https://api.nasa.gov/EPIC/api/natural/date/2015-10-31";
+
+					var apiKey = 'Your Key Goes Here'; 
+
+					var request = new XMLHttpRequest(); 
+					request.open('GET', exampleURL + '?api_key=' + apiKey, true);
+
+					request.addEventListener('load',function(){
+
+					if(request.status >= 200 && request.status < 400){
+					var response = JSON.parse(request.responseText);
+					console.log(response);
+					} 
+					else {
+					     console.log("Error in network request: " + request.statusText);
+					}});
+					request.send(null);
+					</code>
+					</pre>
+					<p> 
+					The key concept here is the query URL with the following code: "https://api.nasa.gov/EPIC/api/natural/date/2015-10-31"
+					This query requests from the NASA servers that I receive for the date of 2015-10-31 all natural color images taken from the EPIC instrumentation. If I wanted the enhanced color images instead, all I would have to do is change the URL query to the following:
+					"https://api.nasa.gov/EPIC/api/enhanced/date/2015-10-31".
+					</p>
+					<h1 class = "normalH">Returned EPIC Object</h1>
+					<p> 
+					Once again, we will take a look at the returned object from the previous module but this time with all the metadata expanded.
+					</p>
+					<pre>
+					<code>
+					<img src="images/JSON3.jpg" style="width:700px;height:550px;">
+					</code>
+					</pre>
+					<p>
+					This metadata is explained in great detail in the EPIC API documentation here:
+					</p>
+					<p>
+					<a href="https://epic.gsfc.nasa.gov/about/api" target="_blank">Metadata Information</a>
+					</p>
+					<p>
+					All metedata information is quite straightforward with this API except for accessing the images from the NASA servers. As you can see from the above example. The image data returned is simply a string with the image name "epic_1b_20151031003633_01".
+					</p>
+					<h1 class = "normalH">Retrieving EPIC Images</h1>
+					<p> 
+					To access the EPIC images from the NASA servers, the image name has to be placed at the end of another URL query that follows the following formula:
+					</p>
+					<pre>
+					<code>
+					https://epic.gsfc.nasa.gov/archive/natural/' + year + '/' + month + '/' + day + '/jpg/' + 'IMAGE_NAME+ '.jpg';
+
+					Previous Example:
+					https://epic.gsfc.nasa.gov/archive/natural/2015/10/31/jpg/epic_1b_20151031003633_01.jpg
+					</code>
+					</pre>
+					<p> 
+					That URL can be used to directly view the full resolution version of the requested EPIC image. As you can imagine, this then cane be implemented into a return function to allow you to request a specific image on a given day and then display that image to the user of your site. In the next section this functionality will be showed to you through an example Javascript program!
+					</p>
+					<h1 class = "normalH">EPIC API in Action!</h1>
+					<p> 
+					The following code is the exact code used in the implementation of the API example at the bottom of the page. After looking at the example below, please continue reading for a line by line explanation of each section of the code including referenced HTML.
+					</p>
+					<pre>
+					<code>
+				var apiKey = 'Your Key Here'; 
+
+				      document.addEventListener('DOMContentLoaded', submitButtonsReady);
+
+				      function submitButtonsReady(){
+				        document.getElementById('dateInput').addEventListener('click', function(event){
+				          var request = new XMLHttpRequest();
+
+				          var date = document.getElementById('dateValue').value;
+				          var dateArray = date.split("-");
+				          var year = dateArray[0];
+				          var month = dateArray[1];
+				          var day = dateArray[2];
+
+				          request.open('GET', 'https://api.nasa.gov/EPIC/api/natural/date/' + date + '?api_key=' + apiKey, true);
+				          request.addEventListener('load',function(){
+				           if(request.status >= 200 && request.status < 400){
+
+				              var response = JSON.parse(request.responseText);
+
+				              if(typeof(response[0].image) === 'string')
+				              {
+				                document.getElementById('imageStatus').textContent = 'Found';
+				                document.getElementById('imageID').src = 'https://epic.gsfc.nasa.gov/archive/natural/' + year + '/' + month + '/' + day + '/jpg/' + response[0].image + '.jpg';
+				                document.getElementById('imageCaption').textContent = response[0].caption;
+				              }
+
+				            } 
+				            else 
+				            { 
+				                  console.log("Error in network request: " + request.statusText);
+
+				             }});
+				          document.getElementById('imageStatus').textContent = 'Please try a different date or check your syntax!';
+				          request.send(null);
+				          event.preventDefault();
+				        })
+
+				      }
+					</code>
+					</pre>
+					<br>
+					<h1 class = "normalH">FORM Event Listeners</h1>
+					<p> 
+					As previously mentioned, this guide is meant to explain the NASA API and not go into lengthy detail regarding form usage or DOM events. The first couple of lines in this code will be used in all API examples going forward. As a reminder for those reading, this guide will summarize what these functions are doing as they interact with the API features of this tutorial.
+					</p>
+					<pre>
+					<code>
+			var apiKey = 'Your Key Here'; 
+
+			document.addEventListener('DOMContentLoaded', submitButtonsReady);
+
+			function submitButtonsReady(){
+			document.getElementById('dateInput').addEventListener('click', function(event){
+					</code>
+					</pre>
+					<p> 
+					The first line of this code is familiar with the declared variable for the user's API key. The line under adds a new event listner to the HTML document that enables the function 'submitButtonReady()' once all prestablished DOM elements are loaded and ready on the screen. The purpose of this is to ensure that all DOM documents are availibile for modification before the function 'submitButtonsReady()' tries to modify them. The line under that is the function declaration for 'submitButtonsReady()'. The purpose of this function is to launch our API's AJAX request when the user clicks to the submit button located on the page. This submit button can be seen below in the API example. 
+					</p>
+					<h1 class = "normalH">EPIC AJAX Request</h1>
+					<p> 
+					The next part of the code should look somewhat familiar compared to the API and JSON module examples. We are creating a new object called 'request' that is going to open our AJAX stream through the 'XMLHttpRequest()' function.
+					</p>
+					<pre>
+					<code>
+					function submitButtonsReady(){
+				        document.getElementById('dateInput').addEventListener('click', function(event){
+				          var request = new XMLHttpRequest();
+
+				          var date = document.getElementById('dateValue').value;
+				          var dateArray = date.split("-");
+				          var year = dateArray[0];
+				          var month = dateArray[1];
+				          var day = dateArray[2];
+
+				          request.open('GET', 'https://api.nasa.gov/EPIC/api/natural/date/' + date + '?api_key=' + apiKey, true);
+					</code>
+					</pre>
+					<p>
+					The next part of the code is where understanding the query URL and image result URL comes to play. In order for you to succesfully make the API query request and point to the NASA directory when linking a pulled image, it is neccesary to take the input from the user and make individual string variables for the year, month, and day. The line of code, 'document.getElementById('dateValue').value' pulls the string input from the HTML form and assigns the string to the variable 'date'. This string variable is taken in the format "YYYY-MM-DD". The next line of code 'date.split("-")' takes the 'date' variable and splits it into an array of values that are separated based off the dash in the provided string. From this, we can parse the 'dateArray' array and assign a string variable equal to the year, month, and day respectively. Now the separate date variables aren't needed for the AJAX request but will be neccesary for constructing a URL to link to the posted image. The final line of code 'request.open('GET', 'https://api.nasa.gov/EPIC/api/natural/date/' + date + '?api_key=' + apiKey, true)', should look familiar at this point. We are simply sending the EPIC API AJAX request to retrieve the JSON object containing the natural images taken on the date specified by the user of the HTML form.
+					</p>
+					<h1 class = "normalH">Parsing EPIC JSON</h1>
+					<p> 
+					The next part of the code should look somewhat familiar to previous examples. The AJAX request will move through if a proper request status is received. 
+					</p>
+					<pre>
+					<code>
+					request.addEventListener('load',function(){
+				           if(request.status >= 200 && request.status < 400){
+
+				              var response = JSON.parse(request.responseText);
+
+				              if(typeof(response[0].image) === 'string')
+				              {
+				                document.getElementById('imageStatus').textContent = 'Found';
+				                document.getElementById('imageID').src = 'https://epic.gsfc.nasa.gov/archive/natural/' + year + '/' + month + '/' + day + '/jpg/' + response[0].image + '.jpg';
+				                document.getElementById('imageCaption').textContent = response[0].caption;
+				              }
+					</code>
+					</pre>
+					<p>
+					The new lines of code appear at the conditional statement 'if(typeof(response[0].image) === 'string')'. This statement checks to see if the requested image method from the parsed JSON object is of the type string. The reason this is neccesary is the API will accept dates that don't actually contain EPIC data and still respond with a status in the acceptable range. This conditional statement ensures the user knows if a proper date has been passed. The code above is only executed if a correct date has been entered. The next line of code, 'document.getElementById('imageStatus').textContent = 'Found'' simply changes the text content of the span "Image Retrieval Status: ". This shows the user that an actual image has been found. The next line of code shows why the date parsing before the AJAX request was neccesary. The code, 'document.getElementById('imageID').src = 'https://epic.gsfc.nasa.gov/archive/natural/' + year + '/' + month + '/' + day + '/jpg/' + response[0].image + '.jpg';' will append the image source code that correclty corresponds with the requested date in the query URL. The image URL depends on the year, month, and day all concatenated as one long string along with the pulled image file name contained in the response[0].image method. In this example, there is only one picture pulled from the API request. It is possible to 12 photos that are taken throughout the requested day. For the purposes of this example we are only showing the first image acquired on the requested date. The last line of code, 'document.getElementById('imageCaption').textContent = response[0].caption;', simply appends the associated image caption to the HTML span "Image Caption: ".
+					</p>
+
+
+					<h1 class = "normalH">EPIC API Recap</h1>
+					<p> 
+					At this point, the remainder of this code is almost identical to previous examples. There is one additional line, 'document.getElementById('imageStatus').textContent = 'Please try a different date or check your syntax!';', that will notify the user if the API request was accepted by the NASA server but there was no image data sent back to the user. The working version of the EPIC API example code is located below. 
+					</p>
 
 
 
+
+
+
+
+					<hr>
+					<h1 class = "normalH">EPIC API Example</h1>
+					<p> 
+					This is an example of the EPIC API in action!
+					</p>	
 					<div>
 				<form>
 			      <fieldset>
