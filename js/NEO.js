@@ -53,7 +53,6 @@ var apiKey = '9Tn2WuDuvpyUzRGyYKKCt09AJJGpqfNSPBlWLvWz';
                 var capString = NEOCADdate.close_approach_date;
 
                 var newTable = document.createElement("table");
-                newTable.setAttribute("style", "border: 2px solid black;");
                 var tableCap = document.createElement("caption");
                 tableCap.textContent = "Date: " + capString;
                 var row1 = document.createElement("tr");
@@ -108,18 +107,6 @@ var apiKey = '9Tn2WuDuvpyUzRGyYKKCt09AJJGpqfNSPBlWLvWz';
 
 
               }
-
-
-              
-
-
-              
-
-
-              
-
-              
-
 
               var allCells = document.body.getElementsByTagName("td");
               var allHeaders = document.body.getElementsByTagName("th");

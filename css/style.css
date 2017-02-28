@@ -211,7 +211,8 @@
 		{
 			margin: 0;
 			padding: 0em 0em 1.5em 0em;
-			list-style: none;
+			list-style-type: circle;
+			list-style-position: inside;
 		}
 		
 			ul.default li
@@ -220,12 +221,14 @@
 				font-size: 0.95em;
 				border-top: 1px solid;
 				border-color: rgba(0,0,0,.1);
+				list-style-position: inside;
 			}		
 		
 			ul.default li:first-child
 			{
 				padding-top: 0;
 				border-top: none;
+				list-style-position: inside;
 			}
 	
 			ul.default {
@@ -1063,4 +1066,19 @@
 	{
 		font-size: large;
 		font-weight: bold;
+	}
+
+	table
+	{
+		text-align: center;
+		border: 2px solid black;
+	}
+	#NEOlist
+	{
+		list-style-type: circle;
+		list-style-position: inside;
+	}
+	li
+	{
+		list-style-position: inside;
 	}

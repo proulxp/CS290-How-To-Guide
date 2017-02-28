@@ -6,10 +6,6 @@ var apiKey = '9Tn2WuDuvpyUzRGyYKKCt09AJJGpqfNSPBlWLvWz';
         document.getElementById('dateInput').addEventListener('click', function(event){
           var request = new XMLHttpRequest();
           var date = document.getElementById('dateValue').value;
-          var dateArray = date.split("-");
-          var year = dateArray[0];
-          var month = dateArray[1];
-          var day = dateArray[2];
           var roverName = "";
 
           var buttonStatus1 = document.getElementById('button1').checked;
@@ -29,7 +25,6 @@ var apiKey = '9Tn2WuDuvpyUzRGyYKKCt09AJJGpqfNSPBlWLvWz';
           {
             roverName = "spirit";
           }
-          console.log("Here!");
           request.open('GET', 'https://api.nasa.gov/mars-photos/api/v1/rovers/' + roverName +'/photos?earth_date='+ date + '&api_key=' + apiKey, true);
           request.addEventListener('load',function(){
            if(request.status >= 200 && request.status < 400){

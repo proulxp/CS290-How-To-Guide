@@ -49,12 +49,71 @@
 				<section>
 					<header>
 						<h2>NEO API</h2>
-						<span class="byline">What is an API?</span>
+						<span class="byline"></span>
 					</header>
-					<p>   API Intro Page 
+					<h1 class = "normalH">NEO API Background</h1>
+					<p> 
+					The final NASA API that this guide explores is the NEO (Near-Eart Object) Feed API. Out of the three specific API's this guide discusses, this API has the least amount of information present on the NASA documentation page. The documentation that is present can be found here:
+					</p>
+					<p>
+					<a href="https://api.nasa.gov/api.html#neows-feed" target="_blank">NEO Feed API Documentation</a>
+					</p>
+					<p>
+					This guide will explore the NEO feed API but it is worth mentioning that there are two other associated APIs called NEO-Lookup and NEO-Browse. NEO Feed returns back a JSON object that contains an array of all the objects that have their closest approach to earth over the requested date range of the query (with a maximum of 7 days). NEO-Lookup returns information on one specific object that the user queries and NEO browse returns back an JSON object containing the overall asteroid data set. As mentioned above, the NEO Feed API does not contain very much information regarding the metadata that is returned from the API. There is a simple query example provided but not much more documentation than that. This guide will fill in these caps by expainling the returned metadata in detail, potential issues with parsing this data, and lastly this guide will go through and show a complete example of the implementation of the API.
+					</p>
+					<h1 class = "normalH">NEO Feed Query</h1>
+					<p> 
+					The NEO Feed is queried very similar to the other NASA API's as seen below:
+					</p>
+					<pre>
+					<code>
+					var exampleURL = "https://api.nasa.gov/neo/rest/v1/feed?start_date=2015-09-07&end_date=2015-09-08&"
+
+					var apiKey = 'Your Key Goes Here'; 
+
+					var request = new XMLHttpRequest(); 
+					request.open('GET', exampleURL + 'api_key=' + apiKey, true);
+
+					request.addEventListener('load',function(){
+
+					if(request.status >= 200 && request.status < 400){
+					var response = JSON.parse(request.responseText);
+					console.log(response);
+					} 
+					else {
+					     console.log("Error in network request: " + request.statusText);
+					}});
+					request.send(null);
+					</code>
+					</pre>
+					<p>
+					The query request follows the query template found at the documentation link above. The query URL accepts a start date and an ending date and will then return a JSON object containing an object that contains individiual methods labeled in condjuntion with the date range requested. As mentioned before, this API will only accept a maximum date range of 7 days. 
+					</p>
+					<h1 class = "normalH">NEO Feed Returned JSON Metadata</h1>
+					<p> 
+					As mentioned before, the current documentation for the NEO Feed does not highlight the available metadata that this API. Using the above query example, here is the returned JSON object in its entirety. 
+					</p>
+					<pre>
+					<code>
+					<img src="images/JSON5.jpg" style="width:700px;height:550px;">
+					</code>
+					</pre>
+					<p>
+					The JSON Object is broken down into the following sub objects and arrays:
+
+						<ul class="default">
+						<li>near_earth_objects:
+						<ul><li>Info</ul>
+						</li>
+
+						
+
+						</ul>
+					</p>
 
 
-
+					<hr>
+					<p>  
 
 					<div>
 						<form>
