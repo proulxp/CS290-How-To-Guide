@@ -6,7 +6,7 @@
 -->
 <html>
 	<head>
-		<title>API Introduction</title>
+		<title>NASA API How-To Guide</title>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<meta name="description" content="" />
 		<meta name="keywords" content="" />
@@ -52,7 +52,7 @@
 					</header>
 					<h1 class = "normalH">JSON Basics</h1>
 					<p> 
-					The goal of our API requests is to get specific information from the NASA servers. The type of requests we are making are AJAX requests and the type of information such requests return is known as JSON objects. JSON stands for Javascript Object Notation and is the current standard for the type of information returned from AJAX requests. A JSON object is a means of transmitting information in method/value pairs that can be read and then encoded into JavaScript objects by the developer. To start this discussion, please see the previously presented AJAX request code now with the URL variable defined.
+					The goal of our API requests is to get specific information from the NASA servers. The type of requests we are making are AJAX requests and the type of information such requests return is known as JSON objects. JSON stands for JavaScript Object Notation and is the current standard for the type of information returned from AJAX requests. A JSON object is a means of transmitting information in method/value pairs that can be read and then encoded into JavaScript objects by the developer. To start this discussion, please see the previously presented AJAX request code now with the URL variable defined.
 					</p>	
 					<pre>
 					<code>
@@ -89,7 +89,7 @@
 					</code>
 					</pre>
 					<p>
-					The line 'JSON.parse(request.responseText)' takes the received JSON object from our request and parses the text of the request to make a new JavaScript object called response. This response is then displayed to the console. This is incredibly important to the use of these APIs. Once you receive the information you requested, you will want to access it as if it were any other Javascript object containing methods. 
+					The line 'JSON.parse(request.responseText)' takes the received JSON object from our request and parses the text of the request to make a new JavaScript object called 'response'. This response is then displayed to the console. This is incredibly important to the use of these APIs. Once you receive the information you requested, you will want to access it as if it were any other JavaScript object containing methods. 
 					</p>
 
 					<h1 class = "normalH">Example Response Object</h1>
@@ -102,7 +102,7 @@
 					</code>
 					</pre>
 					<p>
-					The above example object should be returned to your browser console while running the above JavaScript in any basic HTML template. As you can see, the returned object contains a LOT of information. In this example, the returned object is actually an array of 12 sub objects containing further sub ojects, strings, and numeric values. Each of these values can be simply accessed just like any other JavaScript objects. This can be shown by the example below:
+					The above example object should be returned to your browser console while running the above JavaScript in any basic HTML template. As you can see, the returned object contains a LOT of information. In this example, the returned object is an array of 12 sub objects containing further sub objects, strings, and numeric values. Each of these values can be simply accessed just like any other JavaScript objects. This can be shown by the example below:
 					</p>
 					<pre>
 					<code>
@@ -125,10 +125,11 @@
 					</p>
 					<h1 class = "normalH">JSON Objects Recap</h1>
 					<p> 
-					At this point, you should have a basic understanding of sending AJAX requests in the format that NASA API's demand and then understand how to parse the returned JSON objects into JavaScript objects. The next three modules will go into far greater detail regaring the specific API query URLs syntax, the specifics of the API returned objects, and then an example for each API on how to implement the returned information!
+					At this point, you should have a basic understanding of sending AJAX requests in the format that NASA API's demand and then understand how to parse the returned JSON objects into JavaScript objects. The next three modules will go into far greater detail regarding the specific API query URLs syntax, the specifics of the API returned objects, and then an example for each API on how to implement the returned information!
 					</p>			
 
 				</section>
+				<br>
 			</div>
 			
 			<div class = "endButtons">
@@ -152,7 +153,13 @@
 	<!-- Copyright -->
 		<div id="copyright">
 			<div class="container">
-				Design: <a href="http://templated.co">TEMPLATED</a> Images: <a href="http://unsplash.com">Unsplash</a> (<a href="http://unsplash.com/cc0">CC0</a>)
+				<span>Site designed by: Phillip Proulx</span>
+				<br>
+				<span>All image rights fall under the NASA public use policy.</span>
+				<br>
+				All information within this guide is referenced from the <a href="https://api.nasa.gov/index.html">NASA API</a> page and subsequent sub-pages.
+				<br>
+				HTML/CSS Design: <a href="http://templated.co">TEMPLATED</a> Images: <a href="http://unsplash.com">Unsplash</a> (<a href="http://unsplash.com/cc0">CC0</a>)
 			</div>
 		</div>
 

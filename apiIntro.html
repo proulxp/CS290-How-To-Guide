@@ -6,7 +6,7 @@
 -->
 <html>
 	<head>
-		<title>API Introduction</title>
+		<title>NASA API How-To Guide</title>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<meta name="description" content="" />
 		<meta name="keywords" content="" />
@@ -53,10 +53,11 @@
 					
 					<h1 class = "normalH">Note on Content</h1>
 					<p> 
-					As stated before in the welcome homepage, this guide is not intended for developer's who have never utilized an API before. This guide is intended to show the specifc details of getting the NASA API up and running while using standard AJAX requests in Java Script without using JQUERY or other outside libraries.</p>			
+					As stated before in the welcome homepage, this guide is not intended for developer's who have never utilized an API before. This guide is intended to show the specific details of getting the NASA API up and running while using standard AJAX requests in JavaScript without using JQUERY or other outside libraries. The documentation currently on the NASA API website simply gives one example of using the APOD API with JQUERY but gives no additional information on how to generally set up any of the NASA APIs. This module will supplement this missing information.
+					</p>			
 					<p>
 					<h1 class = "normalH">API Key</h1>
-					Before we begin setting up our Java Script AJAX requests, you need to obtain a developer key for the NASA API. Even though, the NASA API is mostly public domain (yay!) it still requires a API key to monitor the amout of usage a particular developer is demanding. Registration for the NASA API is currently well documented and can be accomplished at the following link:
+					Before you begin setting up your JavaScript AJAX requests, you need to obtain a developer key for the NASA API. Even though the NASA API is mostly public domain (yay!) it still requires an API key to monitor the amount of usage a developer is demanding. Registration for the NASA API is currently well documented and can be accomplished at the following link:
 					</p>
 					<p>
 					<a href="https://api.nasa.gov/index.html#apply-for-an-api-key" target="_blank">NASA API Key Registration</a>
@@ -104,7 +105,7 @@
 					var apiKey = 'Your Key Goes Here';
 					</code>
 					</pre>
-					This code is the beginning of the AJAX request. The first line is a variable to hold the specific API URL you will be accessing. This will change based on the API you are using. As you will soon see with the specific API examples, this can modified with specific information and variables to specify the type of information the user requests. The second line above hold's the user's API key. This will be intentionally left blank in all examples going forward. API keys should remain private to ensure the developer's usage is properly reflected. 
+					This code is the beginning of the AJAX request. The first line is a variable to hold the specific API URL you will be accessing. This will change based on the API you are using. As you will soon see with the specific API examples, this can be modified with specific information and variables to specify the type of information the user requests. The second line above holds the user's API key. This will be intentionally left blank in all examples going forward. API keys should remain private to ensure the developer's usage is properly reflected. 
 					</p>
 
 					<h1 class = "normalH">NASA GET Requests</h1>
@@ -115,7 +116,7 @@
 					request.open('GET', exampleURL + 'api_key=' + apiKey, true);
 					</code>
 					</pre>
-					The next two lines of code are crucial. This is were the actual AJAX requests takes place. As stated before, this guide is not an all encompasing guide to AJAX requests and asyncronous requests. The key thing to remember is that for all API's in this guide will be of the 'GET' type. This means that we will be simply requesting information from the various NASA servers and not sending information to be posted on those servers. As you can see, the variables defined earlier will form a concatenated URL that will be sent to the NASA servers to request certain information and services. The last part of this request is the 'true' designation. This specifies that our request will be made asyncronously. 
+					The next two lines of code are crucial. This is where the actual AJAX requests takes place. As stated before, this guide is not an all-encompassing guide to AJAX requests and asynchronous requests. The key thing to remember is that for all API's in this guide will be of the 'GET' type. This means that you will be simply requesting information from the various NASA servers and not sending information to be posted on those servers. As you can see, the variables defined earlier will form a concatenated URL that will be sent to the NASA servers to request certain information and services. The last part of this request is the 'true' designation. This specifies that our request will be made asynchronously.
 					</p>
 
 					<h1 class = "normalH">Returned JSON Objects</h1>
@@ -132,7 +133,7 @@
 					}});
 					</code>
 					</pre>
-					The next lines of code handle the request error handling and also return the information that is at the heart of the API. The first line, "request.addEventListener('load',function()", is an event listener attached to our request variable. This listener essentially waits until the defined action 'load' is complete before executing the function endompased by the listener. The 'load' action waits for the page to load before executing. The defined function contains a condtional statement that ensures the request made it to the server and a healthy status was returned. If the status is in the 200-400 range you know the request was succesfully made. If it is outside the range, an error is returned with the concatenated status text. If the request was made succesfully, a new variable called 'response' is created containing the heart of our request, the Javascript object converted from the JSON object containing the requested information. The above example displays the contents of this object to the console. The next page of this guide goes into detail regarding the JSON objects.
+					The next lines of code handle the request error handling and return the information that is at the heart of the API. The first line, "request.addEventListener('load',function()", is an event listener attached to our request variable. This listener essentially waits until the defined action 'load' is completed before executing the function encompassed by the listener. The 'load' action waits for the page to load before executing. The defined function contains a conditional statement that ensures the request made it to the server and a healthy status was returned. If the status is in the 200-400 range, you know the request was successfully made. If it is outside the range, an error is returned with the concatenated status text. If the request was made successfully, a new variable called 'response' is created containing the heart of our request, the JavaScript object converted from the JSON object containing the requested information. The above example displays the contents of this object to the console. The next page of this guide goes into detail regarding the JSON objects.
 					</p>
 
 					<h1 class = "normalH">AJAX Send</h1>
@@ -141,12 +142,12 @@
 					request.send(null);
 					</code>
 					</pre>
-					The last line of code is the send method to our HTTP request object. This sends the request to the NASA servers with no additional information encoded. This is the 'null' value in the parenthesis. There is no additional information because of the fact that all API's discussed in this guide are 'GET' requests. 
+					The last line of code is the send method to our HTTP request object. This sends the request to the NASA servers with no additional information encoded. This is the 'null' value in the parenthesis. There is no additional information because all API's discussed in this guide are 'GET' requests. 
 					</p>
 
 					<h1 class = "normalH">API Introduction Recap</h1>
 					<p>
-					As stated before, the first two sections of this guide should be more a recap to the developer and not an all encompassing guide to AJAX requests. At this point, the developer should understand the formatting of the requests we will be making in this guide. Going forward, the next section will go through an example JSON object returned from EPIC API and then going forward this guide will go into specific detail regarding the aformentioned APIs. 
+					As stated before, the first two sections of this guide should be more a recap to the developer and not an all-encompassing guide to AJAX requests. At this point, the developer should understand the formatting of the requests you will be making in this guide and as they pertain to NASA API queries. Going forward, the next section will go through an example JSON object returned from the NASA EPIC API.
 					</p>
 										
 				</section>
@@ -174,7 +175,13 @@
 	<!-- Copyright -->
 		<div id="copyright">
 			<div class="container">
-				Design: <a href="http://templated.co">TEMPLATED</a> Images: <a href="http://unsplash.com">Unsplash</a> (<a href="http://unsplash.com/cc0">CC0</a>)
+				<span>Site designed by: Phillip Proulx</span>
+				<br>
+				<span>All image rights fall under the NASA public use policy.</span>
+				<br>
+				All information within this guide is referenced from the <a href="https://api.nasa.gov/index.html">NASA API</a> page and subsequent sub-pages.
+				<br>
+				HTML/CSS Design: <a href="http://templated.co">TEMPLATED</a> Images: <a href="http://unsplash.com">Unsplash</a> (<a href="http://unsplash.com/cc0">CC0</a>)
 			</div>
 		</div>
 

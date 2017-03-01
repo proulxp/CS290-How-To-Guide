@@ -6,7 +6,7 @@
 -->
 <html>
 	<head>
-		<title>API Introduction</title>
+		<title>NASA API How-To Guide</title>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<meta name="description" content="" />
 		<meta name="keywords" content="" />
@@ -48,12 +48,12 @@
 			<div id="content" class="container">
 				<section>
 					<header>
-						<h2>Rover API</h2>
+						<h2>Mars Rover API</h2>
 						<span class="byline"></span>
 					</header>
 					<h1 class = "normalH">Rover API Background</h1>
 					<p> 
-					The next API that this guide covers is the Mars Rover Photo API. This API allows developers access to the stored rover information on the NASA servers. This guide will supplement the current online documentation by going into more detail regarding the returned metadata from searching for various rover photos by earth date and by also showing an example of photo retrieval impelmentation by building on the implementation code used in previous parts of this guide. The current online documentation can be found at this link:
+					The next API that this guide covers is the Mars Rover Photo API. This API allows developers access to the stored rover information on the NASA servers. This guide will supplement the current online documentation by going into more detail regarding the returned metadata from searching for various rover photos by earth date and by also showing an example of photo retrieval implementation by building on the implementation code used in previous parts of this guide. The current online documentation can be found at this link:
 					</p>
 					<p>
 					<a href="https://api.nasa.gov/api.html#MarsPhotos" target="_blank">Mars Rover Photo API Documentation</a>
@@ -90,7 +90,7 @@
 					<br>
 					<h1 class = "normalH">Rover Returned JSON Metadata</h1>
 					<p> 
-					After the above AJAX request is made, the API will return a plethora of information. The provided documentation for this API does a honorable job exaplaining the camera codes and designations returned in the JSON object but doesn't tie together all the possible return information for querying by earth date. An example of the returned information from a query by earth date can be seen below:
+					After the above AJAX request is made, the API will return a plethora of information. The provided documentation for this API does a honorable job explaining the camera codes and designations returned in the JSON object but doesn't tie together all the possible return information for querying by earth date. An example of the returned information from a query by earth date can be seen below:
 					</p>
 					<pre>
 					<code>
@@ -98,7 +98,7 @@
 					</code>
 					</pre>
 					<p>
-					As you can see, the API returns a wealth of information from one simple request. When searching simply by earth date, the query returns back an array containing ALL photos taken by that particular rover on that date with each photo being a separate object containing rover information, mission manifest information, and of course photo information. For the above example, this guide has simply expanded the first photo object to highlight all these details. The first drop down shows the camera information that explains which camera took the queried photo, the associated photo id, rover id, the earth date the photo was taken, and most important the server URL that can be linked to view the photo. The documentation regarding the camera designations and their acronyms can be found at the above link. What is additionally amazing about this API is that is also returns mission manifest information about the rover that took the requested photo. The API documentation regarding the manifest can be found at the developer's site below:
+					As you can see, the API returns a wealth of information from one simple request. When searching simply by earth date, the query returns an array containing ALL photos taken by that particular rover on that date with each photo being a separate object containing rover information, mission manifest information, and photo information. For the above example, this guide has simply expanded the first photo object to highlight all these details. The first drop down shows the camera information that explains which camera took the queried photo, the associated photo id, rover id, the earth date the photo was taken, and most important the server URL that can be linked to view the photo. The documentation regarding the camera designations and their acronyms can be found at the above link. What is additionally amazing about this API is that is also returns mission manifest information about the rover that took the requested photo. The API documentation regarding the manifest can be found at the developer's site below:
 					</p>
 					<a href="https://github.com/chrisccerami/mars-photo-api" target="_blank">Mars Rover Photo API Developer Docs</a>
 					<br>
@@ -160,7 +160,7 @@
 					</code>
 					</pre>
 					<p>
-					Even though there is a lot of code above for the implementation of the rover API, most of it is repeated from the previous pages of the guide. Those parts of the code will not be explained and instead this section will simply focus on the new features that apply to the rover API and querying photos by earth date. As you can see above, the code starts off with creating a variable for the API key and then creating an event listner as seen in the EPIC API tutorial. Below this, the date string is taken in and left as a full date string instead of splicing it into individual year, day, and month variables. This is because we can now extract the photo location information from a direct URL instead of having to concatenate our own. The next line of code, "var roverName = "";", creates a variable called roverName that will accept a selection from the user based off the radio button rover of their choosing. The next 3 lines of code simply retrieve the status of the radio buttons located in the HTML of the web application. This then is used to reassign the 'roverName' variable with the string value that the API accepts for querying. This is accomplished in the conditional statements. 
+					Even though there is a lot of code above for the implementation of the rover API, most of it is repeated from the previous pages of the guide. Those parts of the code will not be explained and instead this section will simply focus on the new features that apply to the rover API and querying photos by earth date. As you can see above, the code starts off with creating a variable for the API key and then creating an event listener as seen in the EPIC API tutorial. Below this, the date string is taken in and left as a full date string instead of splicing it into individual year, day, and month variables. This is because we can now extract the photo location information from a direct URL instead of having to concatenate your own. The next line of code, "var roverName = "";", creates a variable called roverName that will accept a selection from the user based off the radio button rover of their choosing. The next 3 lines of code simply retrieve the status of the radio buttons located in the HTML of the web application. This then is used to reassign the 'roverName' variable with the string value that the API accepts for querying. This is accomplished in the conditional statements. 
 					</p>
 					<h1 class = "normalH">Appending Rover Data</h1>
 					<p> 
@@ -176,7 +176,7 @@
 					</code>
 					</pre>
 					<p>
-					This code will append the pulled data from the JSON object and place it on the assosciated HTML element to display the query results to the user. For this implementation example, the guide simply accesses the first image object form the returned JSON object. The documentation link above goes into detail on how to change your query to request a specific camera from a specific rover if the developer would want less information returned from each request. This guide left the full return object to demonstrate the abundance of information this API provides. The first line, 'document.getElementById('imageStatus').textContent = 'Found';', simply lets the user know if a image was found and returned. If the AJAX status request was within the appropriate range then this line of code will be displayed by default meaning that the query was successful. The next line, 'document.getElementById('imageID').src = response.photos[0].img_src;' is an important contrast from the previous module. As mentioned before, the EPIC API needed to concatenated a image location URL to allow the image to be displayed to the user. This API provides an added bonus in that it simply returns a full URL string that can be appended on our image object as shown above. The remaining three lines simply extract the mission manifest information from the returned object and append it to the HTML to allow the user to understand the context of the rover mission and where the requested photo fits in the mission timeline. 
+					This code will append the pulled data from the JSON object and place it on the associated HTML element to display the query results to the user. For this implementation example, the guide simply accesses the first image object from the returned JSON object. The documentation link above goes into detail on how to change your query to request a specific camera from a specific rover if the developer would want less information returned from each request. This guide left the full return object to demonstrate the abundance of information this API provides. The first line, 'document.getElementById('imageStatus').textContent = 'Found';', simply lets the user know if an image was found and returned. If the AJAX status request was within the appropriate range, then this line of code will be displayed by default meaning that the query was successful. The next line, 'document.getElementById('imageID').src = response.photos[0].img_src;' is an important contrast from the previous module. As mentioned before, the EPIC API needed to concatenate an image location URL to allow the image to be displayed to the user. This API provides a bonus in that it simply returns a full URL string that can be appended on our image object as shown above. The remaining three lines simply extract the mission manifest information from the returned object and append it to the HTML to allow the user to understand the context of the rover mission and where the requested photo fits in the mission timeline. 
 					</p>
 
 					<h1 class = "normalH">Rover API Recap</h1>
@@ -268,7 +268,13 @@
 	<!-- Copyright -->
 		<div id="copyright">
 			<div class="container">
-				Design: <a href="http://templated.co">TEMPLATED</a> Images: <a href="http://unsplash.com">Unsplash</a> (<a href="http://unsplash.com/cc0">CC0</a>)
+				<span>Site designed by: Phillip Proulx</span>
+				<br>
+				<span>All image rights fall under the NASA public use policy.</span>
+				<br>
+				All information within this guide is referenced from the <a href="https://api.nasa.gov/index.html">NASA API</a> page and subsequent sub-pages.
+				<br>
+				HTML/CSS Design: <a href="http://templated.co">TEMPLATED</a> Images: <a href="http://unsplash.com">Unsplash</a> (<a href="http://unsplash.com/cc0">CC0</a>)
 			</div>
 		</div>
 

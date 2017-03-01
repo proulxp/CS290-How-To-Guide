@@ -17,8 +17,6 @@ var apiKey = '9Tn2WuDuvpyUzRGyYKKCt09AJJGpqfNSPBlWLvWz';
           startNum = Number(startDay);
           endNum = Number(endDay);
 
-
-
             var myNode = document.getElementById("tableHeader");
             while (myNode.firstChild) 
             {
@@ -102,9 +100,6 @@ var apiKey = '9Tn2WuDuvpyUzRGyYKKCt09AJJGpqfNSPBlWLvWz';
                 }
 
               tableHeader.appendChild(newTable);
-
-
-
 
               }
 
