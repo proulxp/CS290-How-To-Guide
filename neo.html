@@ -59,7 +59,7 @@
 					<a href="https://api.nasa.gov/api.html#neows-feed" target="_blank">NEO Feed API Documentation</a>
 					</p>
 					<p>
-					This guide will explore the NEO feed API but it is worth mentioning that there are three other associated APIs called NEO-Lookup, NEO-Browse, and NEO - Live Documents. NEO Feed returns a JSON object that contains an array of all the objects that have their closest approach to earth over the requested date range of the query (with a maximum of 7 days). NEO-Lookup returns information on one specific object that the user queries, NEO browse returns a JSON object containing the overall asteroid data set, and NEO - Live Document is a built-in web application on the API site with integration for mobile development. As mentioned above, the NEO Feed API does not contain very much information regarding the metadata that is returned from the API. There is a simple query example provided but not much more documentation than that. This guide will fill in these caps by explaining the returned metadata in detail, potential issues with parsing this data, and lastly this guide will go through and show a complete example of the implementation of the NEO Feed API.is present can be found here:
+					This guide will explore the NEO feed API but it is worth mentioning that there are three other associated APIs called NEO-Lookup, NEO-Browse, and NEO - Live Documents. NEO Feed returns a JSON object that contains an array of all the objects that have their closest approach to earth over the requested date range of the query (with a maximum of 7 days). NEO-Lookup returns information on one specific object that the user queries, NEO browse returns a JSON object containing the overall asteroid data set, and NEO - Live Document is a built-in web application on the API site with integration for mobile development. As mentioned above, the NEO Feed API does not contain very much information regarding the metadata that is returned from the API. There is a simple query example provided but not much more documentation than that. This guide will fill in these caps by explaining the returned metadata in detail, potential issues with parsing this data, and lastly this guide will go through and show a complete example of the implementation of the NEO Feed API.
 					</p>
 					<h1 class = "normalH">NEO Feed Query</h1>
 					<p> 
@@ -104,7 +104,7 @@
 						<ul class="default">
 						<li>element_count
 						<br>
-						<span>This is the total sum of individual objects that the query returns across all dates in the requested date range.</span>
+						<span>This is the total sum of individual celestial objects that the query returns across all dates in the requested date range.</span>
 						<li> near_earth_objects
 						<br>
 						<span>This is an object that contains all of the query information the developer seeks. The object is broken up into individual methods that correspond to the dates in the query range. As you can see in the example above, this example requested the date range from 2015-09-07 to 2015-09-08 and the return object contains an individual method for each date. As a side note, this makes parsing the data challenging which will be further explored later in this guide.</span>
@@ -264,7 +264,7 @@
 					The first section of this code up to the AJAX request should look quite familiar except for a couple of small changes. The first 3 lines are essentially identical to the previous two API example implementations. A variable is created to hold the developer's API key and an event listener is created to start the request upon clicking a submit button in the HTML form. The next couple of lines should also look quite familiar. There is a variable created called 'request' that handles the actual AJAX request and there are variables created to accept the string values of the start and end dates that are pulled from the associated HTML form. 
 					</p>
 					<p>
-					The next section of code varies a bit from the previous examples. The string variables that hold the start and end dates are split based off the '-' character and the day string value is assigned to a new variable called 'startDay' and 'endDay'. These new string variables are then in turn passed into the built in JavaScript function called Number() that turns the number stored in string form into an actual number variable. These new numbers are stored in the 'startNum' and 'endMNum' variables. The reason this needs to happen is because of the for-loops that are used later in the code. The total number of days that the user requests to be queried is calculated and stored in the next line of code in the variable 'numDays'. The necessity of this for this API will be discussed in the next couple of paragraphs.
+					The next section of code varies a bit from the previous examples. The string variables that hold the start and end dates are split based off the '-' character and the day string value is assigned to a new variable called 'startDay' and 'endDay'. These new string variables are then in turn passed into the built in JavaScript function called Number() that turns the number stored in string form into an actual number variable. These new numbers are stored in the 'startNum' and 'endNum' variables. The reason this needs to happen is because of the for-loops that are used later in the code. The total number of days that the user requests to be queried is calculated and stored in the next line of code in the variable 'numDays'. The necessity of this for this API will be discussed in the next couple of paragraphs.
 					</p>
 					<p>
 					The code found starting with the declaration of the 'tableHeader' variable all the way to the actual AJAX request is simply some DOM housekeeping. This code is placed in to delete any previously made tables from an earlier request. That way when the user wants to change a request date or start a new request they do not need to refresh the page.
@@ -366,6 +366,8 @@
 				<span>All image rights fall under the NASA public use policy.</span>
 				<br>
 				All information within this guide is referenced from the <a href="https://api.nasa.gov/index.html">NASA API</a> page and subsequent sub-pages.
+				<br>
+				Referenced <a href="http://www.jpl.nasa.gov">JPL Database</a>
 				<br>
 				HTML/CSS Design: <a href="http://templated.co">TEMPLATED</a> Images: <a href="http://unsplash.com">Unsplash</a> (<a href="http://unsplash.com/cc0">CC0</a>)
 			</div>
