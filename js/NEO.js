@@ -1,3 +1,14 @@
+/*
+Name: Phillip Proulx
+Course: CS290
+Date: 08/23/2017
+Title: NEO.js
+Description: A javascript program that leverages the NASA NEO API to dynamically
+generate tables containing near earth objects within a certain date range.
+
+Referenced: CS290 lecture material.
+*/
+
 var apiKey = '9Tn2WuDuvpyUzRGyYKKCt09AJJGpqfNSPBlWLvWz'; 
 
       document.addEventListener('DOMContentLoaded', submitButtonsReady);
@@ -129,4 +140,4 @@ var apiKey = '9Tn2WuDuvpyUzRGyYKKCt09AJJGpqfNSPBlWLvWz';
 
       }
 
-      //https://epic.gsfc.nasa.gov/archive/natural/2015/10/31/jpg/epic_1b_20151031022436_01.jpg
+     
